@@ -1,0 +1,13 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="com.poc.fileUpload.Angular.persister.FileUploadMapper">
+
+    <resultMap id="fileUploadMap" type="com.poc.fileUpload.Angular.model.FileUploadModel" >
+        <id column="ID" property="id"  />
+        <result column="DAFILENAME" property="daFileName" />
+        <result column="DAFILETYPE" property="daFileType" />
+        <result column="DAFILE" property="file" />
+    </resultMap>   
+</mapper>
+
