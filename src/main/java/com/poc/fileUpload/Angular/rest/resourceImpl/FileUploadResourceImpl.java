@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.sql.SQLException;
+import java.util.Base64;
 
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -49,13 +50,11 @@ public class FileUploadResourceImpl implements FileUploadResource {
 	}
 
 	@Override
-	public Response downloadFile() throws IOException {
+	public Response downloadFile(int id) throws IOException, SQLException {
 		// TODO Auto-generated method stub
-		File file = fileUploadService.downloadFile();
-		ResponseBuilder response = Response.ok((Object) file);
-		response.header("Content-Disposition", "attachment;filename=aman.png");
-		System.out.println(file.getAbsolutePath());
-		System.out.println(file.delete());
+		byte[] file = fileUploadService.downloadFile(id);
+		ResponseBuilder response = Response.ok(file);
+		response.header("Content-Disposition", "attachment;filename=aman.pdf");
 		return response.build();
 	}
 

@@ -9,11 +9,7 @@ import java.io.OutputStream;
 import java.util.Iterator;
 import java.util.List;
 
-import javax.ws.rs.core.Response;
-
-import org.glassfish.jersey.media.multipart.FormDataContentDisposition;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 
 import com.poc.fileUpload.Angular.model.FileUploadModel;
@@ -41,20 +37,16 @@ public class FileUploadServiceImpl implements FileUploadService{
 	}
 
 	@Override
-	public File downloadFile() throws IOException {
-		// TODO Auto-generated method stub
-		File fil=File.createTempFile("temp-file-name", ".png");
-		int id =104;
-		FileUploadModel fm =mapper.downloadFile(id);
-		InputStream inputStream = fm.getDaFile();
-		outputStream = new FileOutputStream(fil);
-		int read = 0;
-		byte[] bytes = new byte[102400000];
-
-		while ((read = inputStream.read(bytes)) != -1) {
-			outputStream.write(bytes, 0, read);
-		}
-		return fil;
+	public byte[] downloadFile(int id) throws IOException {
+		ByteArrayOutputStream out = new ByteArrayOutputStream();
+	    FileUploadModel fm =mapper.downloadFile(id);
+	    InputStream inputStream = fm.getDaFile();
+	    int read = 0;
+	    byte[] bytes = new byte[1024];
+	    while ((read = inputStream.read(bytes)) != -1) {
+	        out.write(bytes, 0, read);
+	    }
+	    return out.toByteArray();
 	}
 
 }

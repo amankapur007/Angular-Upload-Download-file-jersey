@@ -8,6 +8,7 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -27,7 +28,7 @@ public interface FileUploadResource {
             @FormDataParam("file") FormDataBodyPart bodyPart) throws ClassNotFoundException, SQLException, FileNotFoundException, IOException;
 	
 	@GET
-	@Path("v1/download")
+	@Path("v1/download/{id}")
 	@Produces(MediaType.APPLICATION_OCTET_STREAM)
-	public Response downloadFile() throws IOException;
+	public Response downloadFile(@PathParam("id") int id) throws IOException, SQLException;
 }
